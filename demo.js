@@ -22,7 +22,7 @@ try {
 main().catch(console.error);
 
 async function listDataBases(client){
-    const dataBaseList = await client.db().admin().listDataBases();
+    const dataBaseList = await client.db().admin().listDatabases();
 
     console.log("DataBases:");
     dataBaseList.databases.forEach(db => {
