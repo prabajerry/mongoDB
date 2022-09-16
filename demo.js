@@ -20,13 +20,19 @@ try {
 }
 
 main().catch(console.error);
+async function createListing (client,newListing) {
+   const result = await client.db("sample_airebnb").collection("listAndReviews").insertone(newListing)
+    console.log('New listing created with the following id : ${result.insertedI} ');
+        
+    
+}
 
 async function listDataBases(client){
     const dataBaseList = await client.db().admin().listDatabases();
 
     console.log("DataBases:");
     dataBaseList.databases.forEach(db => {
-        console.log(`-${db.name}`);
+        consolse.log(`-${db.name}`);
         
     });
 }
