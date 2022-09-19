@@ -7,7 +7,14 @@ async function main() {
     const client = new MongoClient(uri)
 try {
     await client.connect();
-    await listDataBases(client);
+    createListing(client,{
+        Bookname : "wings of fire",
+        AutherName: "APJ",
+        Publishing : "university Press",
+        year:"1999"
+
+        
+    })
     
 } catch (e) {
     console.error(e);
@@ -20,9 +27,10 @@ try {
 }
 
 main().catch(console.error);
+
 async function createListing (client,newListing) {
-   const result = await client.db("sample_airebnb").collection("listAndReviews").insertone(newListing)
-    console.log('New listing created with the following id : ${result.insertedI} ');
+   const result = await client.db("sample_airbnb").collection("listingAndReviews").insertOne(newListing)
+    console.log(`New listing created with the following id : ${result.insertedId} `);
         
     
 }
