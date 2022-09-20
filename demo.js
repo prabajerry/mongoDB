@@ -11,7 +11,10 @@ try {
         Bookname : "wings of fire",
         AutherName: "APJ",
         Publishing : "university Press",
-        year:"1999"
+        year:"1999",
+        bedrooms:1,
+        bathrooms:1
+        
 
         
     })
