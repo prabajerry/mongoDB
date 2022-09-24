@@ -7,15 +7,27 @@ async function main() {
     const client = new MongoClient(uri)
 try {
     await client.connect();
-    await createListing(client, {
-        Bookname : "wings of fire",
-        AutherName: "APJ",
-        Publishing : "university Press",
-        year:"1999",
-        
-
-        
-    })
+    await createMultipleListing(client, [
+        {
+            Bookname : "wings of fire",
+            AutherName: "APJ",
+            Publishing : "university Press",
+            year:1999
+        },
+        {
+            
+            Bookname : "secret",
+            AutherName: "Rhonda Byrne",
+            Publishing : "Beyond words",
+            year:2006
+        },
+        {
+            Bookname : "The life",
+            AutherName: "Malcolm Knox",
+            Publishing : "self Publishing",
+            year:2012
+        },
+    ])
     
 } catch (e) {
     console.error(e);
@@ -30,7 +42,7 @@ try {
 main().catch(console.error);
 async function createMultipleListing(client,newListings) {
    const results = await client.db("sample_airbnb").collection("listingAndReviews").insertMany(newListings)
-   console.log(`${results.insertedCount} new listings created with the following id(s):`);
+   console.log(`${results.insertedCount} new listings created with the following id(d)`);
 }
 
 async function createListing (client,newListing) {
