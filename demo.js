@@ -7,6 +7,7 @@ async function main() {
     const client = new MongoClient(uri)
 try {
     await client.connect();
+    await findOneListByBookname(client,"secret")
     await createMultipleListing(client, [
         {
             Bookname : "wings of fire",
@@ -27,6 +28,20 @@ try {
             Publishing : "self Publishing",
             year:2012
         },
+        {
+            Bookname : "The law ofsuccess",
+            AutherName: "Napoleon Hill",
+            Publishing : "Tribeca Books",
+            year:1928
+        },
+        {
+            Bookname : "You Can",
+            AutherName: " Frank Abagnale jr",
+            Publishing : "Grosset & Dunlap",
+            year:1980
+        },
+        
+        
     ])
     
 } catch (e) {
@@ -40,17 +55,24 @@ try {
 }
 
 main().catch(console.error);
+async function findOneListByBookname(client,nameofListing) {
+    const res = await client.db("sample_airbnb").collection("listingAndReviews").findOne({Bookname:nameofListing})
+
+    if(res){
+        console.log(`found a listing in the collection with the name'${nameofListing}'`);
+        console.log(res);
+    }
+    else{
+        console.log(`no Listing found with the name '${nameofListing}'`);
+    }
+    
+}
 async function createMultipleListing(client,newListings) {
    const results = await client.db("sample_airbnb").collection("listingAndReviews").insertMany(newListings)
    console.log(`${results.insertedCount} new listings created with the following id(d)`);
 }
 
-async function createListing (client,newListing) {
-   const result = await client.db("sample_airbnb").collection("listingAndReviews").insertOne(newListing)
-    console.log(`New listing created with the following id : ${result.insertedId} `);
-        
-    
-}
+
 
 async function listDataBases(client){
     const dataBaseList = await client.db().admin().listDatabases();
