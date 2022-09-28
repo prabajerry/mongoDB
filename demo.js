@@ -7,8 +7,9 @@ async function main() {
     const client = new MongoClient(uri)
 try {
     await client.connect();
-    await findOneListByBookname(client,"secret")
+    await findOneListByBookname(client , "Rhonda Byrne")
     await createMultipleListing(client, [
+
         {
             Bookname : "wings of fire",
             AutherName: "APJ",
@@ -62,7 +63,7 @@ try {
 
 main().catch(console.error);
 async function findOneListByBookname(client,nameofListing) {
-    const res = await client.db("sample_airbnb").collection("listingAndReviews").findOne({Bookname:nameofListing})
+    const res = await client.db("sample_airbnb").collection("listingAndReviews").findOne({AutherName:nameofListing})
 
     if(res){
         console.log(`found a listing in the collection with the name'${nameofListing}'`);
