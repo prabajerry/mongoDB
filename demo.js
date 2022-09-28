@@ -7,7 +7,8 @@ async function main() {
     const client = new MongoClient(uri)
 try {
     await client.connect();
-    await findOneListByBookname(client , "Rhonda Byrne")
+    await findOneListByBookname(client , "The life")
+    await findOneListByAudhername(client,"APJ")
     await createMultipleListing(client, [
 
         {
@@ -63,7 +64,7 @@ try {
 
 main().catch(console.error);
 async function findOneListByBookname(client,nameofListing) {
-    const res = await client.db("sample_airbnb").collection("listingAndReviews").findOne({AutherName:nameofListing})
+    const res = await client.db("sample_airbnb").collection("listingAndReviews").findOne({Bookname:nameofListing})
 
     if(res){
         console.log(`found a listing in the collection with the name'${nameofListing}'`);
@@ -72,6 +73,26 @@ async function findOneListByBookname(client,nameofListing) {
     else{
         console.log(`no Listing found with the name '${nameofListing}'`);
     }
+    
+}
+async function findOneListByAudhername(client,nameofListing) {
+const ans = await client.db("sample_airbnb").collection("listingAndReviews").findOne({AutherName:nameofListing})
+
+if(ans){
+    console.log(`found a listing in the collection with the authername'${nameofListing}'`);
+    console.log(ans);
+
+}
+else{
+    console.log(`no Lisiting found with thhe authername '${nameofListing}'`);
+
+}
+}
+async function findOnelistByPublising(client,nameofListing) {
+    const answer = await client.db("sample_airbnb").collection("listingAndReviews").findOne({Publishing})
+
+
+    try()
     
 }
 async function createMultipleListing(client,newListings) {
