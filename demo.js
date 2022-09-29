@@ -9,6 +9,8 @@ try {
     await client.connect();
     await findOneListByBookname(client , "The life")
     await findOneListByAudhername(client,"APJ")
+    await findOneListByAudhername(client,"self publishing")
+
     await createMultipleListing(client, [
 
         {
@@ -84,15 +86,20 @@ if(ans){
 
 }
 else{
-    console.log(`no Lisiting found with thhe authername '${nameofListing}'`);
+    console.log(`no Lisiting found with the authername '${nameofListing}'`);
 
 }
 }
 async function findOnelistByPublising(client,nameofListing) {
-    const answer = await client.db("sample_airbnb").collection("listingAndReviews").findOne({Publishing})
+    const answer = await client.db("sample_airbnb").collection("listingAndReviews").findOne({Publishing:nameofListing})
 
-
-    try()
+if (answer) {
+    console.log(`found a listing in the collection with the publishing'${nameofListing}'`);
+    console.log(answer);
+    
+} else {
+    console.log(`no Listing found the publishing'${nameofListing}'`);
+}
     
 }
 async function createMultipleListing(client,newListings) {
