@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-async function main() {
+async function main() {SSSSS
 
     const uri = "mongodb+srv://demo:node345@cluster0.v5pmuae.mongodb.net/?retryWrites=true&w=majority"
 
@@ -8,9 +8,10 @@ async function main() {
 try {
     await client.connect();
     await findOneListByBookname(client , "The life")
-    await findOneListByAudhername(client,"APJ")
-    await findOneListByAudhername(client,"self publishing")
+    await findOneListByAudhername(client,"APJ");
+    await findOnelistByPublising(client,"universit Press")
 
+    
     await createMultipleListing(client, [
 
         {
@@ -64,8 +65,8 @@ try {
 
 }
 
-main().catch(console.error);
-async function findOneListByBookname(client,nameofListing) {
+main().catch(console.error)
+async function findOneListByBookname(client, nameofListing) {
     const res = await client.db("sample_airbnb").collection("listingAndReviews").findOne({Bookname:nameofListing})
 
     if(res){
